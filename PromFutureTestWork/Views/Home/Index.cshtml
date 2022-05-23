@@ -1,0 +1,77 @@
+﻿@model PromFutureTestWork.Models.TerminalViewModel
+@{
+    ViewBag.PageTitle = "Личный кабинет - отправка команды на терминал";
+}
+<div>
+Отправка команды на терминал
+</div>
+
+@*Окно терминала*@
+<div style="width: 100%; min-height: 400px; margin: 20px 0 20px 0; background-color: #D5DADF">
+    <form class="row p-3" asp-action="SendCommand" asp-controller="Home" method="post">
+
+        @*Окно с терминалами*@
+        <div class="col mb-4">
+            <label for="terminal_id" class="form-label">ID терминала(ов)</label>
+            <textarea name="terminal_id" class="form-control" type="text" style="height: 250px">@Model.TerminalId</textarea>
+        </div>
+
+        @*Список команд*@
+        <div class="col">
+            <label for="command_id" class="form-label">Команда</label>
+            <select name="command_id" class="form-select" aria-label="Default select example" id="command">
+                <option selected disabled>Выберите команду</option>
+                @foreach(var item in Model.Settings.items)
+                {
+                    <option value="@item.id">@item.name</option>
+                }
+            </select>
+        </div>
+
+        @*Параметры*@
+        <div class="row" id="ajaxDiv"></div>
+
+        @*Кнопки*@
+        <div class="d-md-flex justify-content-center">
+            <btn type="button" class="btn btn-secondary m-2 mt-4" style="width: 150px;">Назад</btn>
+            <input type="submit" class="btn btn-success m-2 mt-4" style="width: 150px;" value="Отправить"/>
+        </div>
+
+    </form>
+</div>
+
+@*Таблица с выполненными командами*@
+<table class="table table-striped">
+<tr>
+    <th>№</th><th>Дата и время</th>
+    <th>Команда</th><th>Параметр 1</th>
+    <th>Параметр 2</th><th>Параметр 3</th>
+    <th>Статус</th>
+</tr>
+
+@if(Model.Rows.Count != 0)
+@for (int i = 1 , j = Model.Rows.Count - 1; i <= Model.Rows.Count && j >= 0; i++, j--)
+    {
+        <tr>
+            <td>@i</td><td>@Model.Rows[j].Date</td><td>@Model.Rows[j].Command</td>
+            <td>@Model.Rows[j].Parameter1</td><td>@Model.Rows[j].Parameter2</td>
+            <td>@Model.Rows[j].Parameter3</td><td>@Model.Rows[j].Status</td>
+        </tr>
+    }
+</table>
+
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script>
+    $('#command').change(function()
+    {
+    // получаем выбранный id
+    var id = $(this).val();
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("GetParameters")/' + id,
+        success: function (data) {
+            $('#ajaxDiv').html(data);
+        }
+    });
+    });    
+    </script>

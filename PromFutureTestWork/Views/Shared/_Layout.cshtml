@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" asp-href-include="/lib/bootstrap/**/*.min.css"
+                           asp-href-exclude="**/*-reboot,**/*-grid*"/>
+    <title>Отправка команды</title>
+</head>
+<body>
+    @*Верхняя панель*@
+    <header>
+        <div class="p-2 navbar navbar-expand-lg bg-dark" role="navigation">
+            <a class="navbar-brand text-white" asp-action="Index">
+                <img src="/img/logo.png" width="40"/>
+                VENDISTA
+            </a>
+            <div class="text-white ms-5 ps-4">@ViewBag.PageTitle</div>
+        </div>
+    </header>
+
+    @*Боковая панель*@
+    <div class="d-flex flex-row">
+        <div class="p-2 bg-light" style="width: 240px; height: calc(100vh - 72px)">
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li>
+                <a href="#" class="nav-link text-black">
+                    <img src="/img/clients.png" width="25" class="me-1"/>
+                    Клиенты</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link  text-black">
+                    <img src="/img/users.png" width="25" class="me-1"/>
+                    Пользователи</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-black">
+                    <img src="/img/terminals.png" width="25" class="me-1"/>
+                    Терминалы</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-black">
+                    <img src="/img/bank.png" width="25" class="me-1"/>
+                    TID Банка</a>
+            </li>
+            <li><a href="#" class="nav-link text-black">
+                <img src="/img/transactions.png" width="25" class="me-1"/>
+                Транзакции</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-black">
+                    <img src="/img/logs.png" width="25" class="me-1"/>
+                    Логи терминалов</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-black">
+                    <img src="/img/cash.png" width="25" class="me-1"/>
+                    Кассы</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-black">
+                    <img src="/img/terminals.png" width="25" class="me-1"/>
+                    <img src="/img/clients.png" width="25" class="me-1"/>
+                    Привязать терминалы к клиенту списком</a>
+            </li>
+        </ul>
+    </div>
+    
+    @*Тело*@
+    <div style="width: 100%; padding: 20px 40px 20px 20px; background-color: #EDF2F9">
+        @RenderBody()
+    </div>
+    </div>
+
+    
+</body>
+</html>

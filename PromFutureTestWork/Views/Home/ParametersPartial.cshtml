@@ -1,0 +1,22 @@
+﻿@model PromFutureTestWork.Models.TerminalSettings.Item
+
+@if(Model.parameter_name1 != null){
+    <div class="col">
+        <div>@Model.parameter_name1</div>
+        <input type="number" name="parameter1" value="@Model.parameter_default_value1" class="form-control"/>
+    </div>
+}
+
+@if(Model.parameter_name2 != null){
+    <div class="col">
+        <div>@Model.parameter_name2</div>
+        <input type="number" name="parameter2" value="@Model.parameter_default_value2" class="form-control"/>
+    </div>
+}
+
+@if(Model.parameter_name3 != null){
+    <div class="col">
+        <div>@Model.parameter_name3</div>
+        <input type="number" name="parameter3" value="@Model.parameter_default_value3" class="form-control"/>
+    </div>
+}
